@@ -91,7 +91,7 @@ public:
 
 	inline Vec3<T>& Normalize()
 	{
-		this /= this.GetMagnitude();
+		*this /= (*this).GetMagnitude();
 
 		return *this;
 	}
