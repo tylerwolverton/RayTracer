@@ -1,18 +1,1 @@
-﻿  main.cpp
-c:\users\tyler wolverton\documents\github\raytracer\raytracer\ray.h(2): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\tyler wolverton\documents\github\raytracer\raytracer\main.cpp(48): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-c:\users\tyler wolverton\documents\github\raytracer\raytracer\main.cpp(47): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-c:\users\tyler wolverton\documents\github\raytracer\raytracer\main.cpp(46): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-  RayTracer.vcxproj -> C:\Users\Tyler Wolverton\Documents\GitHub\RayTracer\RayTracer\Debug\RayTracer.exe
+﻿

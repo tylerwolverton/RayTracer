@@ -8,6 +8,12 @@ public:
 	T& g = y;
 	T& b = z;
 
+	Vec3()
+		: x(0),
+		y(0),
+		z(0)
+	{}
+
 	Vec3(T p_x, T p_y, T p_z)
 		: x(p_x),
 		y(p_y),
@@ -25,6 +31,15 @@ public:
 		y(vec.y),
 		z(vec.z)
 	{}
+
+	inline Vec3<T> operator=(const Vec3<T>& vec)
+	{
+		x = vec.x;
+		y = vec.y;
+		z = vec.z;
+
+		return *this;
+	}
 
 	inline Vec3<T> operator-() const
 	{

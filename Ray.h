@@ -1,5 +1,5 @@
 #pragma once
-#include "Vec3.h";
+#include "Vec3.h"
 
 template<class T>
 class Ray 
@@ -13,7 +13,7 @@ public:
 		dir(p_dir)
 	{}
 
-	inline T GetPosOnRay(float t) { return origin + t * dir; }
+	inline Vec3<T> GetPosOnRay(float t) { return origin + t * dir; }
 };
 
 typedef Ray<float> Rayf;
