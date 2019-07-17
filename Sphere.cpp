@@ -2,6 +2,11 @@
 
 #include <math.h>
 
+Sphere::~Sphere()
+{
+	delete(Mat);
+}
+
 bool Sphere::Hit(const Rayf& ray, float tMin, float tMax, HitRecord_t& rec) const
 {
 	// Sphere: R^2 = (x - cx)^2 + (y - cy)^2 + (z - cz)^2
@@ -39,4 +44,5 @@ void Sphere::BuildHitRecord(HitRecord_t& rec, float t, Rayf ray) const
 	rec.t = t;
 	rec.p = ray.GetPosOnRay(t);
 	rec.normal = (rec.p - Center) / Radius;
+	rec.matPtr = Mat;
 }

@@ -8,34 +8,32 @@
 #include "Sphere.h"
 #include "HitableList.h"
 #include "Camera.h"
-
-float randf01()
-{
-	return float(rand() % 100) / 100;
-}
-
-// Find point in unit cube and reject if not in sphere
-Vec3f GetRandomVectorInUnitSphere()
-{
-	Vec3f p;
-	do {
-		p = 2.0 * Vec3f(randf01(), randf01(), randf01()) - Vec3f(1, 1, 1);
-	} while (p.GetSquaredMagnitude() >= 1);
-
-	return p;
-}
+#include "Material.h"
+#include "Lambertian.h"
+#include "Metal.h"
+#include "Misc.h"
 
 // Need to pass by value to avoid polluting input ray
-Vec3f DetermineColor(Rayf ray, Hitable* world)
+Vec3f DetermineColor(Rayf ray, Hitable* world, int depth)
 {
 	HitRecord_t rec;
 	if(world->Hit(ray, 0.001f, FLT_MAX, rec))
 	{ 
-		// Target is a random point in the sphere centered on the point 1 unit
-		// away along the normal from the hit point, p
-		Vec3f target = rec.p + rec.normal + GetRandomVectorInUnitSphere();
-		// Return half intensity of the color found at reflected target location
-		return 0.5f * DetermineColor(Rayf(rec.p, target - rec.p), world);
+		Rayf scattered;
+		Vec3f attenuation;
+		if (depth < 50
+			&& rec.matPtr->Scatter(ray, rec, attenuation, scattered))
+		{
+			// TODO: Double check how tail end recursion works and whether I can optimize this call
+			Vec3f color = DetermineColor(scattered, world, depth + 1);
+			return Vec3f(attenuation.x * color.x,
+						 attenuation.y * color.y,
+				         attenuation.z * color.z);
+		}
+		else
+		{
+			return Vec3f(0,0,0);
+		}
 	}
 	else
 	{
@@ -46,6 +44,9 @@ Vec3f DetermineColor(Rayf ray, Hitable* world)
 
 int main()
 {
+	/* initialize random seed: */
+	srand(time(NULL));
+
 	std::ofstream ppmFile("out.ppm");
 	ppmFile << "P3\n";
 
@@ -57,12 +58,12 @@ int main()
 	Camera camera;
 
 	std::vector<Hitable*> hitList;
-	hitList.push_back(new Sphere(Vec3f(0, 0, -1), 0.5f));
-	hitList.push_back(new Sphere(Vec3f(0, -100.5, -1), 100));
+	hitList.push_back(new Sphere(Vec3f(0, 0, -1),      0.5f, new Lambertian(Vec3f(0.8f, 0.3f, 0.3f))));
+	hitList.push_back(new Sphere(Vec3f(0, -100.5, -1), 100,  new Lambertian(Vec3f(0.8f, 0.8f, 0.0f))));
+	hitList.push_back(new Sphere(Vec3f(1, 0, -1),      0.5f, new Metal(Vec3f(0.8f, 0.6f, 0.2f), 0.3f)));
+	hitList.push_back(new Sphere(Vec3f(-1, 0, -1),     0.5f, new Metal(Vec3f(0.8f, 0.8f, 0.8f), 1.0f)));
 
-	Hitable *world = new HitableList(hitList, 2);
-	/* initialize random seed: */
-	srand(time(NULL));
+	Hitable *world = new HitableList(hitList, hitList.size());
 
 	// Write pixels left to write and bottom to top
 	for (int j = nRows - 1; j >= 0; j--)
@@ -85,7 +86,7 @@ int main()
 				// Convert from 0-1 range back to 0-255 range
 				// Leaving float results in small numbers, not multiplying by 
 				// 255.9 results in all 0
-				color += DetermineColor(ray, world);
+				color += DetermineColor(ray, world, 0);
 			}
 
 			// Average the individual color values determined by each ray to blend into the final pixel color
