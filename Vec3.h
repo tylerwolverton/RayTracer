@@ -94,12 +94,12 @@ public:
 			           x * vec.y - y * vec.x);
 	}
 
-	inline float GetMagnitude()
+	inline float GetMagnitude() const
 	{
 		return sqrt(GetSquaredMagnitude());
 	}
 
-	inline float GetSquaredMagnitude()
+	inline float GetSquaredMagnitude() const
 	{
 		return x * x + y * y + z * z;
 	}

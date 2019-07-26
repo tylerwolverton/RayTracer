@@ -11,6 +11,7 @@
 #include "Material.h"
 #include "Lambertian.h"
 #include "Metal.h"
+#include "Glass.h"
 #include "Misc.h"
 
 // Need to pass by value to avoid polluting input ray
@@ -61,7 +62,8 @@ int main()
 	hitList.push_back(new Sphere(Vec3f(0, 0, -1),      0.5f, new Lambertian(Vec3f(0.8f, 0.3f, 0.3f))));
 	hitList.push_back(new Sphere(Vec3f(0, -100.5, -1), 100,  new Lambertian(Vec3f(0.8f, 0.8f, 0.0f))));
 	hitList.push_back(new Sphere(Vec3f(1, 0, -1),      0.5f, new Metal(Vec3f(0.8f, 0.6f, 0.2f), 0.3f)));
-	hitList.push_back(new Sphere(Vec3f(-1, 0, -1),     0.5f, new Metal(Vec3f(0.8f, 0.8f, 0.8f), 1.0f)));
+	hitList.push_back(new Sphere(Vec3f(-1, 0, -1),     0.5f, new Glass(1.5f)));
+	hitList.push_back(new Sphere(Vec3f(-1, 0, -1),   -0.45f, new Glass(1.5f)));
 
 	Hitable *world = new HitableList(hitList, hitList.size());
 

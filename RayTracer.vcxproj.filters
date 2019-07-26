@@ -56,5 +56,8 @@
     <ClInclude Include="Metal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Glass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
