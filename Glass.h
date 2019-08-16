@@ -60,6 +60,7 @@ public:
 private:
 	Vec3f reflect(const Vec3f& v, const Vec3f& n) const { return v - 2 * v.dot(n) * n; }
 
+	// ni_over_nt is the refraction indices of each material
 	bool refract(Vec3f v, const Vec3f& n, float ni_over_nt, Vec3f& refracted) const
 	{
 		v.Normalize();

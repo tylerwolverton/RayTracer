@@ -25,7 +25,7 @@ Vec3f DetermineColor(Rayf ray, Hitable* world, int depth)
 		if (depth < 50
 			&& rec.matPtr->Scatter(ray, rec, attenuation, scattered))
 		{
-			// TODO: Double check how tail end recursion works and whether I can optimize this call
+			// TODO: Double check how tail end recursion works and whether this call can be optimized
 			Vec3f color = DetermineColor(scattered, world, depth + 1);
 			return Vec3f(attenuation.x * color.x,
 						 attenuation.y * color.y,
@@ -56,7 +56,7 @@ int main()
 	int nRaysPerPixel = 100;
 	ppmFile << nCols << " " << nRows <<"\n255\n";
 
-	Camera camera;
+	Camera camera(Vec3f(-2,2,1), Vec3f(0,0,-1), Vec3f(0,1,0), 30, float(nCols) / float(nRows));
 
 	std::vector<Hitable*> hitList;
 	hitList.push_back(new Sphere(Vec3f(0, 0, -1),      0.5f, new Lambertian(Vec3f(0.8f, 0.3f, 0.3f))));
@@ -85,15 +85,15 @@ int main()
 				// Ray from origin to current pixel
 				Rayf ray(camera.GetRay(u, v));
 
-				// Convert from 0-1 range back to 0-255 range
-				// Leaving float results in small numbers, not multiplying by 
-				// 255.9 results in all 0
 				color += DetermineColor(ray, world, 0);
 			}
 
 			// Average the individual color values determined by each ray to blend into the final pixel color
 			color /= float(nRaysPerPixel);
 			color = Vec3f(sqrt(color.r), sqrt(color.g), sqrt(color.b));
+
+			// Convert from 0-1 range back to 0-255 range
+			// Leaving float results in small numbers, not multiplying by 255.9 results in all 0
 			Vec3i rgbScaled(255.9*color.r,
 							255.9*color.g,
 							255.9*color.b);
@@ -101,6 +101,8 @@ int main()
 			ppmFile << rgbScaled.r << " " << rgbScaled.g << " " << rgbScaled.b << "\n";
 		}
 	}
+
+	delete world;
 
 	return 0;
 }
