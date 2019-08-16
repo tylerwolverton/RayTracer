@@ -56,7 +56,12 @@ int main()
 	int nRaysPerPixel = 100;
 	ppmFile << nCols << " " << nRows <<"\n255\n";
 
-	Camera camera(Vec3f(-2,2,1), Vec3f(0,0,-1), Vec3f(0,1,0), 30, float(nCols) / float(nRows));
+	Vec3f lookFrom(3, 3, 2);
+	Vec3f lookAt(0, 0, -1);
+	float focalLength = (lookFrom - lookAt).GetMagnitude();
+	float aperture = 2.0f;
+
+	Camera camera(lookFrom, lookAt, Vec3f(0,1,0), 30, float(nCols) / float(nRows), aperture, focalLength);
 
 	std::vector<Hitable*> hitList;
 	hitList.push_back(new Sphere(Vec3f(0, 0, -1),      0.5f, new Lambertian(Vec3f(0.8f, 0.3f, 0.3f))));

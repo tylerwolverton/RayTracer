@@ -21,3 +21,13 @@ Vec3f GetRandomVectorInUnitSphere()
 
 	return p;
 }
+
+Vec3f GetRandomVectorInUnitDisc()
+{
+	Vec3f p;
+	do {
+		p = 2.0 * Vec3f(randf01(), randf01(), 0) - Vec3f(1, 1, 0);
+	} while (p.GetSquaredMagnitude() >= 1);
+
+	return p;
+}
