@@ -23,9 +23,8 @@ public:
 		// Determine new basis for view
 		m_frontVec = (lookFrom - lookAt).Normalize();
 		m_rightVec = (vup.cross(m_frontVec)).Normalize();
-		m_upVec = (m_frontVec.cross(m_rightVec));
+		m_upVec = m_frontVec.cross(m_rightVec);
 		m_upVec.y *= -1;
-		//u.x *= -1;
 
 		m_lowerLeftCorner = m_origin - halfWidth * focalLength * m_rightVec - halfHeight * focalLength * m_upVec - focalLength * m_frontVec;
 		m_horizontal = 2 * halfWidth * focalLength * m_rightVec;

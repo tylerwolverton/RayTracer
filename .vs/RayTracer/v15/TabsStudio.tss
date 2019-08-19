@@ -5,39 +5,10 @@
       <string>C:\Users\Tyler Wolverton\Documents\GitHub\RayTracer\main.cpp</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Tyler Wolverton\Documents\GitHub\RayTracer\Vec3.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Tyler Wolverton\Documents\GitHub\RayTracer\Ray.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Tyler Wolverton\Documents\GitHub\RayTracer\Hitable.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Tyler Wolverton\Documents\GitHub\RayTracer\Sphere.cpp</string>
-      <string>C:\Users\Tyler Wolverton\Documents\GitHub\RayTracer\Sphere.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Tyler Wolverton\Documents\GitHub\RayTracer\HitableList.cpp</string>
-      <string>C:\Users\Tyler Wolverton\Documents\GitHub\RayTracer\HitableList.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
       <string>C:\Users\Tyler Wolverton\Documents\GitHub\RayTracer\Camera.h</string>
     </ArrayOfString>
     <ArrayOfString>
-      <string>C:\Users\Tyler Wolverton\Documents\GitHub\RayTracer\Material.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Tyler Wolverton\Documents\GitHub\RayTracer\Lambertian.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Tyler Wolverton\Documents\GitHub\RayTracer\Metal.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
       <string>C:\Users\Tyler Wolverton\Documents\GitHub\RayTracer\Misc.h</string>
-    </ArrayOfString>
-    <ArrayOfString>
-      <string>C:\Users\Tyler Wolverton\Documents\GitHub\RayTracer\Glass.h</string>
     </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

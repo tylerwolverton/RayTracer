@@ -12,7 +12,6 @@ HitableList::~HitableList()
 
 bool HitableList::Hit(const Rayf& ray, float tMin, float tMax, HitRecord_t& rec) const
 {
-	//HitRecord_t tempRec;
 	bool hitAnything = false;
 	float closestSoFar = tMax;
 	for (auto& obj : m_hitList)
@@ -22,7 +21,6 @@ bool HitableList::Hit(const Rayf& ray, float tMin, float tMax, HitRecord_t& rec)
 		{
 			hitAnything = true;
 			closestSoFar = rec.t;
-			//rec = tempRec;
 		}
 	}
 
